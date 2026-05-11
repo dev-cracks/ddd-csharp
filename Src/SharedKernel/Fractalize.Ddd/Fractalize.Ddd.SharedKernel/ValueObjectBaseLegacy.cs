@@ -100,5 +100,3 @@ public abstract class ValueObjectBaseLegacy : IComparable, IComparable<ValueObje
     }
 }
 
-public abstract record ValueObjectBase;
-

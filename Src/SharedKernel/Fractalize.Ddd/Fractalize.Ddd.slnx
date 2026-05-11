@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Fractalize.Ddd.SharedKernel.Test/Fractalize.Ddd.SharedKernel.Test.csproj" Id="be828bc0-2b81-4530-a25a-0c46854d51a0" />
   <Project Path="Fractalize.Ddd.SharedKernel/Fractalize.Ddd.SharedKernel.csproj" />
 </Solution>
