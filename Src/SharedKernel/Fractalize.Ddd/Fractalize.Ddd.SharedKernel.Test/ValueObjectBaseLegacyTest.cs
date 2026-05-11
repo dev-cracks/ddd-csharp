@@ -48,23 +48,6 @@
         public required string Currency { get; set; }
         public required decimal Amount { get; set; }
 
-        //protected override IEnumerable<object> GetEqualityComponents()
-        //{
-        //    var equalityComponents = new List<object> 
-        //    {
-        //        Amount,
-        //        Currency
-        //    };
-
-        //    return equalityComponents;
-        //}
-
-        //protected override IEnumerable<object> GetEqualityComponents() =>
-        //    [
-        //        Amount,
-        //        Currency
-        //    ];
-
         protected override IEnumerable<object> GetEqualityComponents() 
         {
             yield return Currency;
