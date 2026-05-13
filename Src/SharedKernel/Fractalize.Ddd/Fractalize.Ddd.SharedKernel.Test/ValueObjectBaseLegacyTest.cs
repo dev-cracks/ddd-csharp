@@ -43,7 +43,7 @@
         }
     }
 
-    internal class MoneyStub : ValueObjectBaseLegacy
+    internal class MoneyStub : ValueObjectLegacyBase
     {
         public required string Currency { get; set; }
         public required decimal Amount { get; set; }

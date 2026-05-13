@@ -9,14 +9,4 @@
 public abstract class EntityBase<TId>
 {
     public required TId Id { get; set; }
-
-    private readonly List<DomainEventBase> _domainEvents = [];
-
-    public IReadOnlyCollection<DomainEventBase> DomainEvents => _domainEvents;
-
-    public void AddDomainEvent(DomainEventBase domainEvent) => 
-        _domainEvents.Add(domainEvent);
-
-    public void ClearDomainEvents(DomainEventBase domainEvent) =>
-        _domainEvents.Add(domainEvent);
 }

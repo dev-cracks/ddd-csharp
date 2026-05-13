@@ -8,7 +8,7 @@
 /// properties rather than identity. Derived classes should override equality members to ensure correct value
 /// comparison. This class is intended for use in domain-driven design patterns.</remarks>
 [Obsolete($"Use {nameof(ValueObjectBase)} instead")]
-public abstract class ValueObjectBaseLegacy : IComparable, IComparable<ValueObjectBaseLegacy>
+public abstract class ValueObjectLegacyBase : IComparable, IComparable<ValueObjectLegacyBase>
 {
     /// <summary>
     /// Provides the components that are used to determine equality for the current object.
@@ -66,7 +66,7 @@ public abstract class ValueObjectBaseLegacy : IComparable, IComparable<ValueObje
     /// <returns>A value less than zero if the current instance precedes <paramref name="other"/> in the sort order; zero if they
     /// are equal; or a value greater than zero if the current instance follows <paramref name="other"/> in the sort
     /// order.</returns>
-    public int CompareTo(ValueObjectBaseLegacy? other) => 
+    public int CompareTo(ValueObjectLegacyBase? other) => 
         CompareTo(other as object);
 
     /// <summary>
@@ -78,11 +78,11 @@ public abstract class ValueObjectBaseLegacy : IComparable, IComparable<ValueObje
     /// <param name="targetObject">The object to compare with the current instance. Must be of the same type as the current value object.</param>
     /// <returns>A signed integer that indicates the relative order of the objects being compared: less than zero if the current
     /// instance precedes the target object; zero if they are equal; greater than zero if the current instance follows
-    /// the aceptable types are <see cref="ValueObjectBaseLegacy"/>
+    /// the aceptable types are <see cref="ValueObjectLegacyBase"/>
     /// the target object.</returns>
     public int CompareTo(object? targetObject)
     {
-        var targetObj = (ValueObjectBaseLegacy)targetObject!;
+        var targetObj = (ValueObjectLegacyBase)targetObject!;
 
         object[] sourceComponents = GetEqualityComponents().ToArray();
         object[] targetComponents = targetObj!.GetEqualityComponents()!.ToArray();
