@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fractalize.Ddd.SharedKernel", "Fractalize.Ddd.SharedKernel\Fractalize.Ddd.SharedKernel.csproj", "{656123E2-8B8A-C46A-C5F5-99956B038249}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fractalize.Ddd.SharedKernel.Test", "Fractalize.Ddd.SharedKernel.Test\Fractalize.Ddd.SharedKernel.Test.csproj", "{CF163BAB-9CF6-C97A-E46B-52A48CED8366}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{656123E2-8B8A-C46A-C5F5-99956B038249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{656123E2-8B8A-C46A-C5F5-99956B038249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{656123E2-8B8A-C46A-C5F5-99956B038249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{656123E2-8B8A-C46A-C5F5-99956B038249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF163BAB-9CF6-C97A-E46B-52A48CED8366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF163BAB-9CF6-C97A-E46B-52A48CED8366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF163BAB-9CF6-C97A-E46B-52A48CED8366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF163BAB-9CF6-C97A-E46B-52A48CED8366}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A4EB242-78B8-4197-8AE8-697FB6208A4B}
+	EndGlobalSection
+EndGlobal
