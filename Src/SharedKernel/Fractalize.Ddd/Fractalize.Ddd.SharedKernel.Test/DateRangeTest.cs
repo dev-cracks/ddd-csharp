@@ -13,7 +13,10 @@ public class DateRangeTest
     public void Constructor_WithNullStartDate_ThrowsArgumentOutOfRangeException()
     {
         // Arrange & Act & Assert
-        Assert.Throws<ArgumentNullException>(() => new DateRange(startDate: default, endDate: DateTimeOffset.Now.AddDays(-1)));
-        Assert.Throws<ArgumentNullException>(() => new DateRange(startDate: DateTimeOffset.Now.AddDays(-1), endDate: default));
+        var startDateDefaultException = Assert.Throws<ArgumentNullException>(() => new DateRange(startDate: default, endDate: DateTimeOffset.Now.AddDays(-1)));
+        Assert.Equal("startDate", startDateDefaultException.ParamName);
+
+        var endDateDefaultException = Assert.Throws<ArgumentNullException>(() => new DateRange(startDate: DateTimeOffset.Now.AddDays(-1), endDate: default));
+        Assert.Equal("endDate", endDateDefaultException.ParamName);
     }
 }
