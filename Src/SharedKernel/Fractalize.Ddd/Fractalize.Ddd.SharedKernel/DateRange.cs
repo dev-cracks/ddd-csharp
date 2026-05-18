@@ -2,8 +2,8 @@
 
 public record DateRange : ValueObjectBase
 {
-    public DateTimeOffset Start { get; init; }
-    public DateTimeOffset End { get; init; }
+    public DateTimeOffset Start { get; private set; }
+    public DateTimeOffset End { get; private set; }
 
     private DateRange()
     {
