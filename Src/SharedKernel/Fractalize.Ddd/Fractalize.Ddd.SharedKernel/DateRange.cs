@@ -2,8 +2,8 @@
 
 public record DateRange : ValueObjectBase
 {
-    public DateTimeOffset Start { get; set; }
-    public DateTimeOffset End { get; set; }
+    public DateTimeOffset Start { get; init; }
+    public DateTimeOffset End { get; init; }
 
     private DateRange()
     {
@@ -32,4 +32,8 @@ public record DateRange : ValueObjectBase
 
     public bool Overlaps(DateRange dateRange) =>
         Start < End && End > dateRange.Start;
+
+    public int DurationInMinutesRounded() => (int)DurationInMinutes();
+
+    public double DurationInMinutes() => (End - Start).TotalMinutes;
 }
