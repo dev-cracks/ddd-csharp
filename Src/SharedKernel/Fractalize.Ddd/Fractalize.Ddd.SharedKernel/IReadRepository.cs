@@ -1,5 +1,17 @@
-﻿namespace Fractalize.Ddd.SharedKernel;
+﻿using System.Linq.Expressions;
 
-public interface IReadRepository<TEntity, Tid> where TEntity : AggregateRootBase<Tid>
+namespace Fractalize.Ddd.SharedKernel;
+
+/// <summary>
+/// 
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="Tid"></typeparam>
+public interface IReadRepository<TEntity, Tid> where TEntity : EntityBase<Tid>
 {
+    public Task<IReadOnlyCollection<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
+
+    public Task<IReadOnlyCollection<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
+
+    public Task<TEntity> GetByIdAsync(Tid id, CancellationToken cancellationToken = default);
 }
