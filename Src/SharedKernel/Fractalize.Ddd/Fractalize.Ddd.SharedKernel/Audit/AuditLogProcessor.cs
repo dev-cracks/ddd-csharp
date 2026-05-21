@@ -1,25 +1,27 @@
 ﻿namespace Fractalize.Ddd.SharedKernel.Audit;
 
 public class AuditLogProcessor(
-    IReadOnlyCollection<AuditedEvent> eventList, 
-    IClockStamp clockStamp, 
-    IAuditRepository auditRepository)
+    IClockStamp clockStamp,
+    IAuditRepository auditRepository) : IAuditLogProcessor
 {
-    public async Task ProcessEventAsync(AuditedEvent auditedEvent)
+    public async Task ProcessEventAsync(Guid id, Guid userId)
     {
-        // Process the audited event (e.g., log it, store it in a database, etc.)
-        Console.WriteLine($"Processing event: Id={auditedEvent.Id}, Date={auditedEvent.CreatedAt}, UserId={auditedEvent.UserId}");
+        var auditedEvent = new AuditedEvent()
+        {
+            Id = id,
+            UserId = userId,
+            CreatedAt = clockStamp.GetCurrentTime(),
+        };
 
-        auditedEvent.CreatedAt = clockStamp.GetCurrentTime();
         await auditRepository.SaveEventAsync(auditedEvent);
     }
 }
 
-public record AuditedEvent 
+public record AuditedEvent
 {
-    public required Guid Id { get; set; }
+    public required Guid Id { get; init; }
 
-    public required DateTimeOffset CreatedAt { get; set; }
+    public required DateTimeOffset CreatedAt { get; init; }
 
-    public required Guid UserId { get; set; }
+    public required Guid UserId { get; init; }
 }

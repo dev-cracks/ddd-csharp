@@ -1,5 +1,6 @@
 ﻿using Fractalize.Ddd.SharedKernel.Audit;
 using Moq;
+using Newtonsoft.Json;
 using Xunit.Categories;
 
 namespace Fractalize.Ddd.SharedKernel.Test.Audit;
@@ -13,16 +14,10 @@ public class AuditLogProcessorTest
         //Arrange
         var IClockStampMock = new Mock<IClockStamp>();
         var IAuditRepositoryMock = new Mock<IAuditRepository>();
-        IReadOnlyCollection<AuditedEvent> eventList = new List<AuditedEvent>();
-        AuditLogProcessor auditLogProcessor = new AuditLogProcessor(eventList, IClockStampMock.Object, IAuditRepositoryMock.Object);
+        AuditLogProcessor auditLogProcessor = new AuditLogProcessor(IClockStampMock.Object, IAuditRepositoryMock.Object);
 
         //Act
-        await auditLogProcessor.ProcessEventAsync(new AuditedEvent()
-        {
-            Id = Guid.NewGuid(),
-            CreatedAt = DateTimeOffset.UtcNow,
-            UserId = Guid.NewGuid(),
-        });
+        await auditLogProcessor.ProcessEventAsync(Guid.NewGuid(), Guid.NewGuid());
 
         //Assert
         IClockStampMock.Verify(x => x.GetCurrentTime(), Times.Once);
@@ -45,14 +40,29 @@ public class AuditLogProcessorTest
         IClockStampMock.Setup(x => x.GetCurrentTime()).Returns(expectedCreationTime);
 
         var IAuditRepositoryMock = new Mock<IAuditRepository>();
-        IReadOnlyCollection<AuditedEvent> eventList = new List<AuditedEvent>();
-        AuditLogProcessor auditLogProcessor = new AuditLogProcessor(eventList, IClockStampMock.Object, IAuditRepositoryMock.Object);
+        AuditLogProcessor auditLogProcessor = new AuditLogProcessor(IClockStampMock.Object, IAuditRepositoryMock.Object);
 
         //Act
-        await auditLogProcessor.ProcessEventAsync(eventTarget);
+        await auditLogProcessor.ProcessEventAsync(eventTarget.Id, eventTarget.UserId);
 
         //Assert
         IClockStampMock.Verify(x => x.GetCurrentTime(), Times.Once);
         IAuditRepositoryMock.Verify(x => x.SaveEventAsync(It.Is<AuditedEvent>(ev => ev.CreatedAt == expectedCreationTime)), Times.Once);
+    }
+
+    [Fact]
+    [UnitTest]
+    public async Task temp_GettingTimeFromClockStamp_IsUseAsAuditEventCreationTime()
+    {
+        //Arrange
+        var eventTarget = new AuditedEvent()
+        {
+            Id = Guid.NewGuid(),
+            UserId = Guid.NewGuid(),
+            CreatedAt = DateTimeOffset.UtcNow,
+        };
+        //Act && Assert
+        var rawEvent = JsonConvert.SerializeObject(eventTarget);
+        var deserializedEvent = JsonConvert.DeserializeObject<AuditedEvent>(rawEvent);
     }
 }
