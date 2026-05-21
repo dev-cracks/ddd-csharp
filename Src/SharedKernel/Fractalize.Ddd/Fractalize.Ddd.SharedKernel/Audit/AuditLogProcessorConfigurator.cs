@@ -5,10 +5,18 @@ namespace Fractalize.Ddd.SharedKernel.Audit;
 
 public static class AuditLogProcessorConfigurator
 {
+    /// <summary>
+    /// Registra las implementaciones relacionadas con el registro de auditoría en el contenedor de dependencias.
+    /// Las dependencias estan mockeadas por no tener la implementación aún.
+    /// </summary>
+    /// <remarks>Utiliza TryAddScoped y TryAddSingleton para registrar IAuditLogProcessor (AuditLogProcessor),
+    /// IClockStamp (ClockStampStub) e IAuditRepository (AuditRepositoryStub).</remarks>
+    /// <param name="services">Colección de servicios en la que se añaden las implementaciones de auditoría.</param>
+    /// <returns>La misma instancia de IServiceCollection para permitir el encadenamiento de llamadas.</returns>
     public static IServiceCollection ConfigureAuditLogProccesor(this IServiceCollection services)
     {
         services.TryAddScoped<IAuditLogProcessor, AuditLogProcessor>();
-        services.TryAddScoped<IClockStamp, ClockStampStub>();
+        services.TryAddSingleton<IClockStamp, ClockStampStub>();
         services.TryAddScoped<IAuditRepository, AuditRepositoryStub>();
 
         return services;
