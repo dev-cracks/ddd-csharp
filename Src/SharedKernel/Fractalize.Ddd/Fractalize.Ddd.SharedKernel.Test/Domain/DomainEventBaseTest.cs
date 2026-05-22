@@ -13,15 +13,21 @@ public class DomainEventBaseTest
     public async Task Serialization_WhenSerializeAndDeserialize_SuccessSerialization()
     {
         //Arrange
+        var expectedEventId = Guid.NewGuid();
+        var expectedOcurredOn = DateTimeOffset.UtcNow;
         var domainEventBase = new DomainEventStub()
         {
-            EventId = Guid.NewGuid(),
-            OccurredOn = DateTimeOffset.UtcNow,
+            EventId = expectedEventId,
+            OccurredOn = expectedOcurredOn,
         };
 
-        //Act && Assert
+        //Act
         var rawEvent = JsonConvert.SerializeObject(domainEventBase);
-        var deserializedEvent = JsonConvert.DeserializeObject<AuditedEvent>(rawEvent);
+        var deserializedEvent = JsonConvert.DeserializeObject<DomainEventStub>(rawEvent);
+
+        //Assert
+        Assert.Equal(expectedEventId, deserializedEvent!.EventId);
+        Assert.Equal(expectedOcurredOn, deserializedEvent!.OccurredOn);
     }
 }
 
