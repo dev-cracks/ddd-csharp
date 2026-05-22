@@ -1,4 +1,6 @@
-﻿namespace Fractalize.Ddd.SharedKernel;
+﻿using Fractalize.Ddd.SharedKernel.Domain;
+
+namespace Fractalize.Ddd.SharedKernel;
 
 public abstract class AggregateRootBase<TId> :  EntityBase<TId>
 {
